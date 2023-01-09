@@ -47,15 +47,10 @@ namespace OrangeHRM.Tests.OrangeHRM.Admin.Job
             GenericPages.AddJobTitlePage.EnterJobDescription(AddJobTitle.JobDescriptionText);
             GenericPages.AddJobTitlePage.ClickSaveButton();
 
-            var actualJobTitleValues = new List<Object>();
-            var actualJobDescriptionValues = new List<Object>();
-            var size = GenericPages.JobTitlesPage.CountAllRows();
-
-            for (var i = 0; i < size; i++)
-            {
-                actualJobTitleValues.Add(GenericPages.JobTitlesPage.GetRowsJobTitleText(i));
-                actualJobDescriptionValues.Add(GenericPages.JobTitlesPage.GetRowsJobDescriptionText(i));
-            }
+            var actualJobTitleValues = new List<string>();
+            var actualJobDescriptionValues = new List<string>();
+            GenericPages.JobTitlesPage.AddAllRowsJobTitleTextToList(actualJobTitleValues);
+            GenericPages.JobTitlesPage.AddAllRowsJobDescriptionTextToList(actualJobDescriptionValues);
 
             Assert.IsTrue(actualJobTitleValues.Contains(AddJobTitle.JobTitleText));
             Assert.IsTrue(actualJobDescriptionValues.Contains(AddJobTitle.JobDescriptionText));
@@ -76,14 +71,10 @@ namespace OrangeHRM.Tests.OrangeHRM.Admin.Job
             GenericPages.AddJobTitlePage.EnterJobDescription(AddJobTitle.EditedText);
             GenericPages.AddJobTitlePage.ClickSaveButton();
 
-            var jobsTitlesAfterEditing = new List<Object>();
-            var jobsDescriptionsAfterEditing = new List<Object>();
-            var size = GenericPages.JobTitlesPage.CountAllRows();
-            for (var i = 0; i < size; i++)
-            {
-                jobsTitlesAfterEditing.Add(GenericPages.JobTitlesPage.GetRowsJobTitleText(i));
-                jobsDescriptionsAfterEditing.Add(GenericPages.JobTitlesPage.GetRowsJobDescriptionText(i));
-            }
+            var jobsTitlesAfterEditing = new List<string>();
+            var jobsDescriptionsAfterEditing = new List<string>();
+            GenericPages.JobTitlesPage.AddAllRowsJobTitleTextToList(jobsTitlesAfterEditing);
+            GenericPages.JobTitlesPage.AddAllRowsJobDescriptionTextToList(jobsDescriptionsAfterEditing);
 
             //specially failed test. Should be AddJobTitle.NewJobTitleText instead of AddJobTitle.JobTitleText
             Assert.IsTrue(jobsTitlesAfterEditing.Contains(AddJobTitle.JobTitleText + AddJobTitle.EditedText));
@@ -102,11 +93,8 @@ namespace OrangeHRM.Tests.OrangeHRM.Admin.Job
             var countedRowsAfterDeletion = GenericPages.JobTitlesPage.CountAllRows();
             Assert.AreEqual(countedRows - 1, countedRowsAfterDeletion);
 
-            var jobsRowsAfterDeletion = new List<Object>();
-            for (var i = 0; i < countedRowsAfterDeletion; i++)
-            {
-                jobsRowsAfterDeletion.Add(GenericPages.JobTitlesPage.GetRowsJobTitleText(i));
-            }
+            var jobsRowsAfterDeletion = new List<string>();
+            GenericPages.JobTitlesPage.AddAllRowsJobTitleTextToList(jobsRowsAfterDeletion);
 
             Assert.IsFalse(jobsRowsAfterDeletion.Contains(deletedJob));
         }
@@ -119,15 +107,10 @@ namespace OrangeHRM.Tests.OrangeHRM.Admin.Job
         public void SortJobs()
         {
             //check default sorting
-            var jobsTitlesByDefault = new List<Object>();
-            var jobsTitlesSorted = new List<Object>();
-
-            var size = GenericPages.JobTitlesPage.CountAllRows();
-            for (var i = 0; i < size; i++)
-            {
-                jobsTitlesByDefault.Add(GenericPages.JobTitlesPage.GetRowsJobTitleText(i));
-                jobsTitlesSorted.Add(GenericPages.JobTitlesPage.GetRowsJobTitleText(i));
-            }
+            var jobsTitlesByDefault = new List<string>();
+            var jobsTitlesSorted = new List<string>();
+            GenericPages.JobTitlesPage.AddAllRowsJobTitleTextToList(jobsTitlesByDefault);
+            GenericPages.JobTitlesPage.AddAllRowsJobTitleTextToList(jobsTitlesSorted);
             jobsTitlesSorted.Sort();
 
             Assert.AreEqual(jobsTitlesSorted, jobsTitlesByDefault);
@@ -135,24 +118,16 @@ namespace OrangeHRM.Tests.OrangeHRM.Admin.Job
             //check desc sorting
             GenericPages.JobTitlesPage.SortJobTitlesDesc();
             jobsTitlesSorted.Reverse();
-
             jobsTitlesByDefault.Clear();
-            for (var i = 0; i < size; i++)
-            {
-                jobsTitlesByDefault.Add(GenericPages.JobTitlesPage.GetRowsJobTitleText(i));
-            }
+            GenericPages.JobTitlesPage.AddAllRowsJobTitleTextToList(jobsTitlesByDefault);
 
             Assert.AreEqual(jobsTitlesSorted, jobsTitlesByDefault);
 
             //check asc sorting
             GenericPages.JobTitlesPage.SortJobTitlesAsc();
             jobsTitlesSorted.Reverse();
-
             jobsTitlesByDefault.Clear();
-            for (var i = 0; i < size; i++)
-            {
-                jobsTitlesByDefault.Add(GenericPages.JobTitlesPage.GetRowsJobTitleText(i));
-            }
+            GenericPages.JobTitlesPage.AddAllRowsJobTitleTextToList(jobsTitlesByDefault);
 
             Assert.AreEqual(jobsTitlesSorted, jobsTitlesByDefault);
         }

@@ -52,5 +52,25 @@ namespace OrangeHRM.PageObjects.Admin.Job
             _sortJobTitlesButton.Click();
             _sortDESCButton.Click();
         }
+
+        public void AddAllRowsJobTitleTextToList(List<string> list)
+        {
+            var size = CountAllRows();
+
+            for (var i = 0; i < size; i++)
+            {
+                list.Add(GetRowsJobTitleText(i));
+            }
+        }
+
+        public void AddAllRowsJobDescriptionTextToList(List<string> list)
+        {
+            var size = CountAllRows();
+
+            for (var i = 0; i < size; i++)
+            {
+                list.Add(GetRowsJobDescriptionText(i));
+            }
+        }
     }
 }

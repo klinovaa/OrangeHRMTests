@@ -51,6 +51,16 @@ namespace OrangeHRM
                 ScrollIntoView();
                 WebElement.Click();
             }
+            catch (NoSuchElementException)
+            {
+                ScrollIntoView();
+                WebElement.Click();
+            }
+            catch (NullReferenceException)
+            {
+                ScrollIntoView();
+                WebElement.Click();
+            }
         }
 
         public IWebElement FindElement(By by) => WebElement.FindElement(By);

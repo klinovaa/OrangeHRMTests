@@ -51,13 +51,8 @@ namespace OrangeHRM.Tests.OrangeHRM.Admin.UserManagement
             Thread.Sleep(4000);//TODO change it later
             GenericPages.AddUserPage.ClickSaveButton();
 
-            var actualUserNameValues = new List<Object>();
-            var size = GenericPages.UsersPage.CountAllRows();
-
-            for (var i = 0; i < size; i++)
-            {
-                actualUserNameValues.Add(GenericPages.UsersPage.GetRowsUsernameText(i));
-            }
+            var actualUserNameValues = new List<string>();
+            GenericPages.UsersPage.AddAllRowsUsernameTextToList(actualUserNameValues);
 
             Assert.IsTrue(actualUserNameValues.Contains(AddUser.UsernameText));
         }
@@ -83,12 +78,8 @@ namespace OrangeHRM.Tests.OrangeHRM.Admin.UserManagement
             Thread.Sleep(4000); //TODO change it later
             GenericPages.AddUserPage.ClickSaveButton();
 
-            var usernamesAfterEditing = new List<Object>();
-            var size = GenericPages.UsersPage.CountAllRows();
-            for (var i = 0; i < size; i++)
-            {
-                usernamesAfterEditing.Add(GenericPages.UsersPage.GetRowsUsernameText(i));
-            }
+            var usernamesAfterEditing = new List<string>();
+            GenericPages.UsersPage.AddAllRowsUsernameTextToList(usernamesAfterEditing);
 
             Assert.IsTrue(usernamesAfterEditing.Contains(AddUser.NewUsernameText + AddUser.EditedText));
         }
@@ -105,11 +96,8 @@ namespace OrangeHRM.Tests.OrangeHRM.Admin.UserManagement
             var countedRowsAfterDeletion = GenericPages.UsersPage.CountAllRows();
             Assert.AreEqual(countedRows - 1, countedRowsAfterDeletion);
 
-            var usersRowsAfterDeletion = new List<Object>();
-            for (var i = 0; i < countedRowsAfterDeletion; i++)
-            {
-                usersRowsAfterDeletion.Add(GenericPages.UsersPage.GetRowsUsernameText(i));
-            }
+            var usersRowsAfterDeletion = new List<string>();
+            GenericPages.UsersPage.AddAllRowsUsernameTextToList(usersRowsAfterDeletion);
 
             Assert.IsFalse(usersRowsAfterDeletion.Contains(deletedUsername));
         }
@@ -124,13 +112,8 @@ namespace OrangeHRM.Tests.OrangeHRM.Admin.UserManagement
             GenericPages.UsersPage.EnterTextInUserNameField(usernameText);
             GenericPages.UsersPage.SearchForUser();
 
-            var actualValues = new List<Object>();
-            var size = GenericPages.UsersPage.CountAllRows();
-
-            for (var i = 0; i < size; i++)
-            {
-                actualValues.Add(GenericPages.UsersPage.GetRowsUsernameText(i));
-            }
+            var actualValues = new List<string>();
+            GenericPages.UsersPage.AddAllRowsUsernameTextToList(actualValues);
 
             foreach (var row in actualValues)
             {
@@ -147,17 +130,12 @@ namespace OrangeHRM.Tests.OrangeHRM.Admin.UserManagement
             GenericPages.UsersPage.SelectStatus(AddUser.EnabledOption);
             GenericPages.UsersPage.SearchForUser();
 
-            var actualValues = new List<Object>();
-            var size = GenericPages.UsersPage.CountAllRows();
-
-            for (var i = 0; i < size; i++)
-            {
-                actualValues.Add(GenericPages.UsersPage.GetRowsStatusText(i));
-            }
+            var actualValues = new List<string>();
+            GenericPages.UsersPage.AddAllRowsStatusTextToList(actualValues);
 
             foreach (var row in actualValues)
             {
-                Assert.AreEqual(AddUser.EnabledOption, row.ToString());
+                Assert.AreEqual(AddUser.EnabledOption, row);
             }
         }
 
@@ -170,13 +148,8 @@ namespace OrangeHRM.Tests.OrangeHRM.Admin.UserManagement
             GenericPages.UsersPage.SelectUserRole(AddUser.AdminOption);
             GenericPages.UsersPage.SearchForUser();
 
-            var actualValues = new List<Object>();
-            var size = GenericPages.UsersPage.CountAllRows();
-
-            for (var i = 0; i < size; i++)
-            {
-                actualValues.Add(GenericPages.UsersPage.GetRowsUserRolesText(i));
-            }
+            var actualValues = new List<string>();
+            GenericPages.UsersPage.AddAllRowsUserRolesTextToList(actualValues);
 
             foreach (var row in actualValues)
             {

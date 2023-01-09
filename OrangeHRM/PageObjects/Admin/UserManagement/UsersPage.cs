@@ -65,5 +65,35 @@ namespace OrangeHRM.PageObjects.Admin.UserManagement
             _statusDropDown.Click();
             _statusOption.Click();
         }
+
+        public void AddAllRowsUsernameTextToList(List<string> list)
+        {
+            var size = CountAllRows();
+
+            for (var i = 0; i < size; i++)
+            {
+                list.Add(GetRowsUsernameText(i));
+            }
+        }
+
+        public void AddAllRowsStatusTextToList(List<string> list)
+        {
+            var size = CountAllRows();
+
+            for (var i = 0; i < size; i++)
+            {
+                list.Add(GetRowsStatusText(i));
+            }
+        }
+
+        public void AddAllRowsUserRolesTextToList(List<string> list)
+        {
+            var size = CountAllRows();
+
+            for (var i = 0; i < size; i++)
+            {
+                list.Add(GetRowsUserRolesText(i));
+            }
+        }
     }
 }
