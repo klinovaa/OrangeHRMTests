@@ -1,0 +1,12 @@
+﻿{
+  "Common": {
+    "Browser": "Chrome",
+    "URLs": {
+      "Home": "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index"
+    },
+    "TestData": {
+      "Username": "Admin",
+      "Password": "admin123"
+    }
+  }
+}
